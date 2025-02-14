@@ -1,10 +1,12 @@
 # Backend API Documentation
 
+This documentation provides details about the backend API endpoints for the Uber Clone application.
+
 ## Endpoints
 
 ### POST /users/register
 
-Register a new user.
+This endpoint registers a new user by accepting their first name, last name, email, and password. It validates the input data and returns a JWT token upon successful registration.
 
 #### Request
 
@@ -77,6 +79,33 @@ Register a new user.
     }
     ```
 
-#### Description
+#### Example
 
-This endpoint registers a new user by accepting their first name, last name, email, and password. It validates the input data and returns a JWT token upon successful registration.
+##### Request
+```bash
+curl -X POST https://yourapi.com/users/register \
+-H "Content-Type: application/json" \
+-d '{
+  "fullname": {
+    "firstname": "John",
+    "lastname": "Doe"
+  },
+  "email": "john.doe@example.com",
+  "password": "password123"
+}'
+```
+
+##### Response
+```json
+{
+  "token": "jwt_token",
+  "user": {
+    "_id": "user_id",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "john.doe@example.com"
+  }
+}
+```
