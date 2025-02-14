@@ -25,7 +25,7 @@ module.exports.registerUser = async (req, res, next) => {
         lastname: fullname.lastname,
         email,
         password: hashedPassword
-    });
+    })
 
     const token = user.generateAuthToken();
 
