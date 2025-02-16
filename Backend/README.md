@@ -15,69 +15,23 @@ This endpoint registers a new user by accepting their first name, last name, ema
 - **Headers**: 
   - `Content-Type: application/json`
 - **Body**:
-  ```json
-  {
-    "fullname": {
-      "firstname": "John",
-      "lastname": "Doe"
-    },
-    "email": "john.doe@example.com",
-    "password": "password123"
-  }
-  ```
+  - `fullname`: Object containing `firstname` and `lastname`
+  - `email`: User's email address
+  - `password`: User's password
 
 #### Response
 
 - **Success**: 
   - **Status Code**: `201 Created`
-  - **Body**:
-    ```json
-    {
-      "token": "jwt_token",
-      "user": {
-        "_id": "user_id",
-        "fullname": {
-          "firstname": "John",
-          "lastname": "Doe"
-        },
-        "email": "john.doe@example.com"
-      }
-    }
-    ```
+  - **Body**: Contains the JWT token and user details
 
 - **Validation Errors**:
   - **Status Code**: `400 Bad Request`
-  - **Body**:
-    ```json
-    {
-      "errors": [
-        {
-          "msg": "Invalid Email",
-          "param": "email",
-          "location": "body"
-        },
-        {
-          "msg": "First name must be at least 3 characters long",
-          "param": "fullname.firstname",
-          "location": "body"
-        },
-        {
-          "msg": "Password must be at least 6 characters long",
-          "param": "password",
-          "location": "body"
-        }
-      ]
-    }
-    ```
+  - **Body**: Contains validation error messages
 
 - **User Already Exists**:
   - **Status Code**: `400 Bad Request`
-  - **Body**:
-    ```json
-    {
-      "message": "User already exist"
-    }
-    ```
+  - **Body**: Message indicating the user already exists
 
 #### Example
 
@@ -96,19 +50,7 @@ curl -X POST https://yourapi.com/users/register \
 ```
 
 ##### Response
-```json
-{
-  "token": "jwt_token",
-  "user": {
-    "_id": "user_id",
-    "fullname": {
-      "firstname": "John",
-      "lastname": "Doe"
-    },
-    "email": "john.doe@example.com"
-  }
-}
-```
+Contains the JWT token and user details.
 
 ### GET /users/profile
 
@@ -125,26 +67,11 @@ This endpoint retrieves the profile of the authenticated user.
 
 - **Success**: 
   - **Status Code**: `200 OK`
-  - **Body**:
-    ```json
-    {
-      "_id": "user_id",
-      "fullname": {
-        "firstname": "John",
-        "lastname": "Doe"
-      },
-      "email": "john.doe@example.com"
-    }
-    ```
+  - **Body**: Contains user profile details
 
 - **Unauthorized**:
   - **Status Code**: `401 Unauthorized`
-  - **Body**:
-    ```json
-    {
-      "message": "Unauthorized"
-    }
-    ```
+  - **Body**: Message indicating unauthorized access
 
 #### Example
 
@@ -155,16 +82,7 @@ curl -X GET https://yourapi.com/users/profile \
 ```
 
 ##### Response
-```json
-{
-  "_id": "user_id",
-  "fullname": {
-    "firstname": "John",
-    "lastname": "Doe"
-  },
-  "email": "john.doe@example.com"
-}
-```
+Contains user profile details.
 
 ### GET /users/logout
 
@@ -181,21 +99,11 @@ This endpoint logs out the authenticated user by blacklisting the JWT token.
 
 - **Success**: 
   - **Status Code**: `200 OK`
-  - **Body**:
-    ```json
-    {
-      "message": "Logged out"
-    }
-    ```
+  - **Body**: Message indicating successful logout
 
 - **Unauthorized**:
   - **Status Code**: `401 Unauthorized`
-  - **Body**:
-    ```json
-    {
-      "message": "Unauthorized"
-    }
-    ```
+  - **Body**: Message indicating unauthorized access
 
 #### Example
 
@@ -206,11 +114,7 @@ curl -X GET https://yourapi.com/users/logout \
 ```
 
 ##### Response
-```json
-{
-  "message": "Logged out"
-}
-```
+Message indicating successful logout.
 
 ### POST /captains/register
 
@@ -223,101 +127,24 @@ This endpoint registers a new captain by accepting their first name, last name, 
 - **Headers**: 
   - `Content-Type: application/json`
 - **Body**:
-  ```json
-  {
-    "fullname": {
-      "firstname": "John",
-      "lastname": "Doe"
-    },
-    "email": "john.doe@example.com",
-    "password": "password123",
-    "vehicle": {
-      "color": "red",
-      "plate": "ABC123",
-      "capacity": 4,
-      "vehicleType": "car"
-    }
-  }
-  ```
+  - `fullname`: Object containing `firstname` and `lastname`
+  - `email`: Captain's email address
+  - `password`: Captain's password
+  - `vehicle`: Object containing `color`, `plate`, `capacity`, and `vehicleType`
 
 #### Response
 
 - **Success**: 
   - **Status Code**: `201 Created`
-  - **Body**:
-    ```json
-    {
-      "token": "jwt_token",
-      "captain": {
-        "_id": "captain_id",
-        "fullname": {
-          "firstname": "John",
-          "lastname": "Doe"
-        },
-        "email": "john.doe@example.com",
-        "vehicle": {
-          "color": "red",
-          "plate": "ABC123",
-          "capacity": 4,
-          "vehicleType": "car"
-        }
-      }
-    }
-    ```
+  - **Body**: Contains the JWT token and captain details
 
 - **Validation Errors**:
   - **Status Code**: `400 Bad Request`
-  - **Body**:
-    ```json
-    {
-      "errors": [
-        {
-          "msg": "Invalid Email",
-          "param": "email",
-          "location": "body"
-        },
-        {
-          "msg": "First name must be at least 3 characters long",
-          "param": "fullname.firstname",
-          "location": "body"
-        },
-        {
-          "msg": "Password must be at least 6 characters long",
-          "param": "password",
-          "location": "body"
-        },
-        {
-          "msg": "Color must be at least 3 characters long",
-          "param": "vehicle.color",
-          "location": "body"
-        },
-        {
-          "msg": "Plate must be at least 3 characters long",
-          "param": "vehicle.plate",
-          "location": "body"
-        },
-        {
-          "msg": "Capacity must be at least 1",
-          "param": "vehicle.capacity",
-          "location": "body"
-        },
-        {
-          "msg": "Invalid vehicle type",
-          "param": "vehicle.vehicleType",
-          "location": "body"
-        }
-      ]
-    }
-    ```
+  - **Body**: Contains validation error messages
 
 - **Captain Already Exists**:
   - **Status Code**: `400 Bad Request`
-  - **Body**:
-    ```json
-    {
-      "message": "Captain already exists"
-    }
-    ```
+  - **Body**: Message indicating the captain already exists
 
 #### Example
 
@@ -342,25 +169,7 @@ curl -X POST https://yourapi.com/captains/register \
 ```
 
 ##### Response
-```json
-{
-  "token": "jwt_token",
-  "captain": {
-    "_id": "captain_id",
-    "fullname": {
-      "firstname": "John",
-      "lastname": "Doe"
-    },
-    "email": "john.doe@example.com",
-    "vehicle": {
-      "color": "red",
-      "plate": "ABC123",
-      "capacity": 4,
-      "vehicleType": "car"
-    }
-  }
-}
-```
+Contains the JWT token and captain details.
 
 ### GET /captains/profile
 
@@ -377,32 +186,11 @@ This endpoint retrieves the profile of the authenticated captain.
 
 - **Success**: 
   - **Status Code**: `200 OK`
-  - **Body**:
-    ```json
-    {
-      "_id": "captain_id",
-      "fullname": {
-        "firstname": "John",
-        "lastname": "Doe"
-      },
-      "email": "john.doe@example.com",
-      "vehicle": {
-        "color": "red",
-        "plate": "ABC123",
-        "capacity": 4,
-        "vehicleType": "car"
-      }
-    }
-    ```
+  - **Body**: Contains captain profile details
 
 - **Unauthorized**:
   - **Status Code**: `401 Unauthorized`
-  - **Body**:
-    ```json
-    {
-      "message": "Unauthorized"
-    }
-    ```
+  - **Body**: Message indicating unauthorized access
 
 #### Example
 
@@ -413,22 +201,7 @@ curl -X GET https://yourapi.com/captains/profile \
 ```
 
 ##### Response
-```json
-{
-  "_id": "captain_id",
-  "fullname": {
-    "firstname": "John",
-    "lastname": "Doe"
-  },
-  "email": "john.doe@example.com",
-  "vehicle": {
-    "color": "red",
-    "plate": "ABC123",
-    "capacity": 4,
-    "vehicleType": "car"
-  }
-}
-```
+Contains captain profile details.
 
 ### GET /captains/logout
 
@@ -445,21 +218,11 @@ This endpoint logs out the authenticated captain by blacklisting the JWT token.
 
 - **Success**: 
   - **Status Code**: `200 OK`
-  - **Body**:
-    ```json
-    {
-      "message": "Logged out"
-    }
-    ```
+  - **Body**: Message indicating successful logout
 
 - **Unauthorized**:
   - **Status Code**: `401 Unauthorized`
-  - **Body**:
-    ```json
-    {
-      "message": "Unauthorized"
-    }
-    ```
+  - **Body**: Message indicating unauthorized access
 
 #### Example
 
@@ -470,8 +233,4 @@ curl -X GET https://yourapi.com/captains/logout \
 ```
 
 ##### Response
-```json
-{
-  "message": "Logged out"
-}
-```
+Message indicating successful logout.
