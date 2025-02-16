@@ -109,3 +109,105 @@ curl -X POST https://yourapi.com/users/register \
   }
 }
 ```
+
+### GET /users/profile
+
+This endpoint retrieves the profile of the authenticated user.
+
+#### Request
+
+- **URL**: `/users/profile`
+- **Method**: `GET`
+- **Headers**: 
+  - `Authorization: Bearer <jwt_token>`
+
+#### Response
+
+- **Success**: 
+  - **Status Code**: `200 OK`
+  - **Body**:
+    ```json
+    {
+      "_id": "user_id",
+      "fullname": {
+        "firstname": "John",
+        "lastname": "Doe"
+      },
+      "email": "john.doe@example.com"
+    }
+    ```
+
+- **Unauthorized**:
+  - **Status Code**: `401 Unauthorized`
+  - **Body**:
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+#### Example
+
+##### Request
+```bash
+curl -X GET https://yourapi.com/users/profile \
+-H "Authorization: Bearer <jwt_token>"
+```
+
+##### Response
+```json
+{
+  "_id": "user_id",
+  "fullname": {
+    "firstname": "John",
+    "lastname": "Doe"
+  },
+  "email": "john.doe@example.com"
+}
+```
+
+### GET /users/logout
+
+This endpoint logs out the authenticated user by blacklisting the JWT token.
+
+#### Request
+
+- **URL**: `/users/logout`
+- **Method**: `GET`
+- **Headers**: 
+  - `Authorization: Bearer <jwt_token>`
+
+#### Response
+
+- **Success**: 
+  - **Status Code**: `200 OK`
+  - **Body**:
+    ```json
+    {
+      "message": "Logged out"
+    }
+    ```
+
+- **Unauthorized**:
+  - **Status Code**: `401 Unauthorized`
+  - **Body**:
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+#### Example
+
+##### Request
+```bash
+curl -X GET https://yourapi.com/users/logout \
+-H "Authorization: Bearer <jwt_token>"
+```
+
+##### Response
+```json
+{
+  "message": "Logged out"
+}
+```
