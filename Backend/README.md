@@ -36,18 +36,7 @@ This endpoint registers a new user by accepting their first name, last name, ema
 #### Example
 
 ##### Request
-```bash
-curl -X POST https://yourapi.com/users/register \
--H "Content-Type: application/json" \
--d '{
-  "fullname": {
-    "firstname": "John",
-    "lastname": "Doe"
-  },
-  "email": "john.doe@example.com",
-  "password": "password123"
-}'
-```
+Use a POST request to `/users/register` with the required headers and body.
 
 ##### Response
 Contains the JWT token and user details.
@@ -76,10 +65,7 @@ This endpoint retrieves the profile of the authenticated user.
 #### Example
 
 ##### Request
-```bash
-curl -X GET https://yourapi.com/users/profile \
--H "Authorization: Bearer <jwt_token>"
-```
+Use a GET request to `/users/profile` with the required headers.
 
 ##### Response
 Contains user profile details.
@@ -108,10 +94,7 @@ This endpoint logs out the authenticated user by blacklisting the JWT token.
 #### Example
 
 ##### Request
-```bash
-curl -X GET https://yourapi.com/users/logout \
--H "Authorization: Bearer <jwt_token>"
-```
+Use a GET request to `/users/logout` with the required headers.
 
 ##### Response
 Message indicating successful logout.
@@ -149,24 +132,7 @@ This endpoint registers a new captain by accepting their first name, last name, 
 #### Example
 
 ##### Request
-```bash
-curl -X POST https://yourapi.com/captains/register \
--H "Content-Type: application/json" \
--d '{
-  "fullname": {
-    "firstname": "John",
-    "lastname": "Doe"
-  },
-  "email": "john.doe@example.com",
-  "password": "password123",
-  "vehicle": {
-    "color": "red",
-    "plate": "ABC123",
-    "capacity": 4,
-    "vehicleType": "car"
-  }
-}'
-```
+Use a POST request to `/captains/register` with the required headers and body.
 
 ##### Response
 Contains the JWT token and captain details.
@@ -195,10 +161,7 @@ This endpoint retrieves the profile of the authenticated captain.
 #### Example
 
 ##### Request
-```bash
-curl -X GET https://yourapi.com/captains/profile \
--H "Authorization: Bearer <jwt_token>"
-```
+Use a GET request to `/captains/profile` with the required headers.
 
 ##### Response
 Contains captain profile details.
@@ -227,10 +190,7 @@ This endpoint logs out the authenticated captain by blacklisting the JWT token.
 #### Example
 
 ##### Request
-```bash
-curl -X GET https://yourapi.com/captains/logout \
--H "Authorization: Bearer <jwt_token>"
-```
+Use a GET request to `/captains/logout` with the required headers.
 
 ##### Response
 Message indicating successful logout.
